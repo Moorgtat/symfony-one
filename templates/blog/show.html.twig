@@ -10,7 +10,8 @@
        {{ article.content | raw }}
     </div>
   </article>
-  <section>
+  <section id="commentaires">
+  <h2>{{ article.comments | length }} commentaires: </h2>
   {% for comment in article.comments %}
      <div class="comment">
         <div class="row">
@@ -18,6 +19,14 @@
             <div class="col-9">{{ comment.content | raw }}</div>
         </div>
      </div>
+     <br>
    {% endfor %}  
+   {{ form_start(commentForm) }}
+   {{ form_row(commentForm.author, {'attr': {'placeholder': 'Votre nom...', 'class': 'form-control'}}) }}
+   {{ form_row(commentForm.content, {'attr': {'placeholder': 'Votre commentaires...', 'class': 'form-control'}}) }}
+   <br>
+   <button type="submit" class="btn btn-success">Ajouter</button>
+   {{ form_end(commentForm) }}
+   <br>
   </section>
 {% endblock %}
